@@ -19,7 +19,14 @@ print("Result 3: ", f(1, 3, 2, 3))
 print("Result 4: ", f(1, 9, 22.0, 3))
 
 
-l = input("Give a genome sequence: ")
+def correct(l):
+    for c in l:
+        if c != "A" and c != "C" and c != "G" and c != "T":
+            return False
+        else:
+            return True
+
+
 def count(l):
     a = l.count("A")
     c = l.count("C")
@@ -28,9 +35,12 @@ def count(l):
     totalcount= a+c+t+g
     return totalcount,a,c,t,g
 
-print("The total number of lrtters is ", str(count(l)[0]))
-print("A : ", str(count(l)[1]))
-print("C : ", str(count(l)[2]))
-print("T : ", str(count(l)[3]))
-print("G : ", str(count(l)[4]))
-
+l = input("Give a genome sequence: ")
+if correct(l) == True:
+    print("The total number of lrtters is ", str(count(l)[0]))
+    print("A : ", str(count(l)[1]))
+    print("C : ", str(count(l)[2]))
+    print("T : ", str(count(l)[3]))
+    print("G : ", str(count(l)[4]))
+else:
+    print("The sequence is shit")
