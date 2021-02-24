@@ -16,3 +16,17 @@ def seq_len(seq):
 
 def seq_count_base(seq, base):
     return seq.count(base)
+
+def seq_count(seq):
+    a, c, g, t = 0, 0, 0, 0
+    for n in seq:
+        if n == "A":
+            a += 1
+        elif n == "C":
+            c += 1
+        elif n == "G":
+            g += 1
+        elif n == "T":
+            t += 1
+    return {"A": a, "C": c, "G": g, "T": t}
+
