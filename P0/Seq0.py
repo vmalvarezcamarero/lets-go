@@ -32,3 +32,16 @@ def seq_count(seq):
 
 def seq_reverse(seq):
     return "".join(reversed(seq))
+
+def seq_complement(seq):
+    new_seq = ""
+    for base in range(0, len(seq)):
+        if seq[base] == "A":
+            new_seq += "T"
+        elif seq[base] == "C":
+            new_seq += "G"
+        elif seq[base] == "T":
+            new_seq += "A"
+        elif seq[base] == "G":
+            new_seq += "C"
+    return new_seq
