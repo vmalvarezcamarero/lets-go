@@ -9,5 +9,4 @@ for gene in gene_list:
     print("Gene " + gene)
     for base in b:
         bases = Seq0.seq_count_base(sequence, base)
-
         print(base + ":", bases)
