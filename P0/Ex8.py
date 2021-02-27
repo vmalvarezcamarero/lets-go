@@ -35,7 +35,6 @@ for d in bases4:
     l_FXN.append(bases4[d])
     FXN_h = l_FXN.index(max(l_FXN))
 
-
 print("-----| Exercise 8 |------")
 print ("The most common base of the gene", U5, "is: --|" ,base[U5_h], "|--")
 print ("The most common base of the gene", ADA, "is: --|" ,base[ADA_h], "|--")
