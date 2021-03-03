@@ -1,22 +1,26 @@
 class Seq:
     """A class for representing sequences"""
 
-    def __init__(self, strbases):
+    def __init__(self, strbases="NULL"):
 
         self.strbases = strbases
-
-        if self.sequence_is_valid():
+        if strbases == "NULL":
+            print("NULL sequence created")
             self.strbases = strbases
-            print("New sequence created!")
         else:
-            self.strbases = "ERROR"
-            print("INCORRECT Sequence detected!")
+
+            if self.sequence_is_valid():
+                self.strbases = strbases
+                print("New sequence created!")
+            else:
+                self.strbases = "ERROR"
+                print("INCORRECT Sequence detected!")
 
     def __str__(self):
-        """Method called when the object is being printed"""
-
-        # -- We just return the string with the sequence
-        return self.strbases
+        if self.strbases != "NULL":
+            return self.strbases
+        else:
+            return "NULL"
 
     def sequence_is_valid(self):
         for c in self.strbases:
