@@ -29,8 +29,13 @@ class Seq:
         """Calculate the length of the sequence"""
         return len(self.strbases)
 
-s1 = Seq("ACCTGC")
-s2 = Seq("Hello? Am I a valid sequence?")
-print(f"Sequence 1: {s1}")
-print(f"Sequence 2: {s2}")
+    @staticmethod
+    def print_bases(list_sequences):
+        for a in range(0,len(list_sequences)):
+            print(f"Sequence {a} (Length:{list_sequences[a].len()}):{list_sequences[a]}")
 
+def generate_series(sequ, number):
+    li = []
+    for i in range(0, number):
+        li.append(Seq(sequ * (i + 1)))
+    return li
