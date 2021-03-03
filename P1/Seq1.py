@@ -31,7 +31,10 @@ class Seq:
 
     def len(self):
         """Calculate the length of the sequence"""
-        return len(self.strbases)
+        if self.strbases != "NULL" and self.strbases != "ERROR":
+            return len(self.strbases)
+        else:
+            return 0
 
     @staticmethod
     def print_bases(list_sequences):
