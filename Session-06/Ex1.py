@@ -3,8 +3,6 @@ class Seq:
 
     def __init__(self, strbases):
 
-        self.strbases = strbases
-
         for a in strbases:
             if a != "A" and a != "C" and a != "G" and a != "T":
                 self.strbases = ("ERROR")
