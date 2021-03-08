@@ -52,6 +52,14 @@ class Seq:
         else:
             return{"A": 0, "C": 0, "T": 0, "G": 0,}
 
+    def seq_reverse(self):
+        if self.strbases != "ERROR" and self.strbases != "NULL":
+            return "".join(reversed(self.strbases))
+        elif self.strbases == "ERROR":
+            return "ERROR"
+        else:
+            return "NULL"
+
 
 
 def generate_series(sequ, number):
