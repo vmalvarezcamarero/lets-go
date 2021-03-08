@@ -55,10 +55,24 @@ class Seq:
     def seq_reverse(self):
         if self.strbases != "ERROR" and self.strbases != "NULL":
             return "".join(reversed(self.strbases))
-        elif self.strbases == "ERROR":
-            return "ERROR"
         else:
-            return "NULL"
+            return self.strbases
+
+    def seq_complement(self):
+        new_seq = ""
+        if self.strbases != "ERROR" and self.strbases != "NULL":
+            for base in range(0, len(self.strbases)):
+                if self.strbases[base] == "A":
+                    new_seq += "T"
+                elif self.strbases[base] == "C":
+                    new_seq += "G"
+                elif self.strbases[base] == "T":
+                    new_seq += "A"
+                elif self.strbases[base] == "G":
+                    new_seq += "C"
+            return new_seq
+        else:
+            return self.strbases
 
 
 
