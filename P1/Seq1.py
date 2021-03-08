@@ -41,6 +41,12 @@ class Seq:
         for a in range(0,len(list_sequences)):
             print(f"Sequence {a} (Length:{list_sequences[a].len()}):{list_sequences[a]}")
 
+    def count_bases(self):
+        if self.strbases != "ERROR" and self.strbases != "NULL":
+            print(f" A: {self.strbases.count('A')}, C: {self.strbases.count('C')}, T: {self.strbases.count('T')}, G: {self.strbases.count('G')},")
+        else:
+            print(f" A: 0, C: 0, T: 0, G: O,")
+
 def generate_series(sequ, number):
     li = []
     for i in range(0, number):
