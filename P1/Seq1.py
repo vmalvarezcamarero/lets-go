@@ -46,6 +46,13 @@ class Seq:
             print(f" A: {self.strbases.count('A')}, C: {self.strbases.count('C')}, T: {self.strbases.count('T')}, G: {self.strbases.count('G')},")
         else:
             print(f" A: 0, C: 0, T: 0, G: O,")
+    def create_dict(self):
+        if self.strbases != "ERROR" and self.strbases != "NULL":
+            return{"A": self.strbases.count('A'), "C": self.strbases.count('C'), "T": self.strbases.count('T'), "G": self.strbases.count('G'),}
+        else:
+            return{"A": 0, "C": 0, "T": 0, "G": 0,}
+
+
 
 def generate_series(sequ, number):
     li = []
