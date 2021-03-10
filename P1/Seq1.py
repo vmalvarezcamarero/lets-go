@@ -1,10 +1,13 @@
+from pathlib import Path
 class Seq:
     """A class for representing sequences"""
+    NULL_SEQUENCE = "NULL"
+    INVALID_SEQUENCE = "ERROR"
 
-    def __init__(self, strbases="NULL"):
+    def __init__(self, strbases=NULL_SEQUENCE):
 
         self.strbases = strbases
-        if strbases == "NULL":
+        if strbases == Seq.NULL_SEQUENCE:
             print("NULL sequence created")
             self.strbases = strbases
         else:
@@ -13,14 +16,14 @@ class Seq:
                 self.strbases = strbases
                 print("New sequence created!")
             else:
-                self.strbases = "ERROR"
+                self.strbases = Seq.INVALID_SEQUENCE
                 print("INCORRECT Sequence detected!")
 
     def __str__(self):
-        if self.strbases != "NULL":
+        if self.strbases != Seq.NULL_SEQUENCE:
             return self.strbases
         else:
-            return "NULL"
+            return Seq.NULL_SEQUENCE
 
     def sequence_is_valid(self):
         for c in self.strbases:
@@ -31,36 +34,51 @@ class Seq:
 
     def len(self):
         """Calculate the length of the sequence"""
-        if self.strbases != "NULL" and self.strbases != "ERROR":
+        if self.strbases != Seq.NULL_SEQUENCE and self.strbases != Seq.INVALID_SEQUENCE:
             return len(self.strbases)
         else:
             return 0
+
 
     @staticmethod
     def print_bases(list_sequences):
         for a in range(0,len(list_sequences)):
             print(f"Sequence {a} (Length:{list_sequences[a].len()}):{list_sequences[a]}")
 
+    def read_fasta(self, filename):
+        sequence = Path(filename).read_text()
+        sequence = sequence[sequence.find("\n") + 1:].replace("\n", "")
+        self.strbases = sequence
+        return sequence
+
+    @staticmethod
+    def frequent_base(dict):
+        maximum = max(dict.values())
+        for key, value in dict.items():
+            if value == maximum:
+                return key
+
+
     def count_bases(self):
-        if self.strbases != "ERROR" and self.strbases != "NULL":
+        if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
             print(f" A: {self.strbases.count('A')}, C: {self.strbases.count('C')}, T: {self.strbases.count('T')}, G: {self.strbases.count('G')},")
         else:
             print(f" A: 0, C: 0, T: 0, G: O,")
     def create_dict(self):
-        if self.strbases != "ERROR" and self.strbases != "NULL":
+        if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
             return{"A": self.strbases.count('A'), "C": self.strbases.count('C'), "T": self.strbases.count('T'), "G": self.strbases.count('G'),}
         else:
             return{"A": 0, "C": 0, "T": 0, "G": 0,}
 
     def seq_reverse(self):
-        if self.strbases != "ERROR" and self.strbases != "NULL":
+        if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
             return "".join(reversed(self.strbases))
         else:
             return self.strbases
 
     def seq_complement(self):
         new_seq = ""
-        if self.strbases != "ERROR" and self.strbases != "NULL":
+        if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
             for base in range(0, len(self.strbases)):
                 if self.strbases[base] == "A":
                     new_seq += "T"

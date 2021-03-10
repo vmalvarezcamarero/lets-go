@@ -1,5 +1,5 @@
 from Seq1 import Seq , generate_series
-print("-----| Practice 1, Exercise 6 |------")
+print("-----| Practice 1, Exercise 7 |------")
 listt = ("A", "C", "T", "G")
 s1 = Seq()
 s2 = Seq("ACTGA")
