@@ -1,8 +1,8 @@
 import socket
 
 # SERVER IP, PORT
-PORT = 8080
-IP = "212.128.253.145"
+PORT = 8081
+IP = "172.17.0.1"
 
 # First, create the socket
 # We will always use this parameters: AF_INET y SOCK_STREAM
@@ -22,3 +22,5 @@ print(msg.decode("utf-8"))
 
 # Closing the socket
 s.close()
+
+

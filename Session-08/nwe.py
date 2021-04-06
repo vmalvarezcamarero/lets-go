@@ -6,4 +6,6 @@ count = 0
 for b in a:
     count += 1
 print(count)
+print(a)
+print (a[::-1])
 
