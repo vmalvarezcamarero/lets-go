@@ -1,12 +1,5 @@
 import socket
 
-# -- Step 1: create the socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# -- Optional: This is for avoiding the problem of Port already in use
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-# Configure the Server's IP and PORT
 PORT = 8081
 IP = "172.17.0.1"
 
