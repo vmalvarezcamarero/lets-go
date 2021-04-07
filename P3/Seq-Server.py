@@ -1,5 +1,7 @@
 import socket
-from termcolor import colored
+import server_utiles
+
+list_sequences = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG", "ATGC"]
 PORT = 8081
 IP = "172.17.0.1"
 
@@ -43,20 +45,29 @@ while True:
         # -- Read the message from the client
         # -- The received message is in raw bytes
         msg_raw = cs.recv(2048)
+        msg = msg_raw.decode()
+        formatted_message = server_utiles.format_command(msg)
+        formatted_message = formatted_message.split(" ")
 
-        # -- We decode it for converting it
-        # -- into a human-redeable string
-        msg = colored(msg_raw.decode(), "green", )
-        response = "ECHO: " + msg_raw.decode() + "\n"
+        if len(formatted_message) == 1:
+            command = formatted_message[0]
+        else:
+            command = formatted_message[0]
+            argument = formatted_message[1]
+        if command == "PING":
+            server_utiles.ping(cs)
 
-        # -- Print the received message
-        print(f"Message received: {msg}")
+        elif command == "GET":
+            response = list_sequences[int(argument)] + "\n"
+            cs.send(response.encode())
 
-        # -- Send a response message to the client
+        else:
 
+            response = "No available PING\n"
 
-        # -- The message has to be encoded into bytes
-        cs.send(response.encode())
+            print(f"Message received: {msg}")
+
+            cs.send(response.encode())
 
         # -- Close the data socket
         cs.close()
