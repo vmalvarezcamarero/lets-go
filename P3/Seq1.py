@@ -14,7 +14,7 @@ class Seq:
 
             if self.sequence_is_valid():
                 self.strbases = strbases
-                print("New sequence created!")
+
             else:
                 self.strbases = Seq.INVALID_SEQUENCE
                 print("INCORRECT Sequence detected!")
@@ -60,8 +60,15 @@ class Seq:
 
 
     def count_bases(self):
+
         if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
-            print(f" A: {self.strbases.count('A')}, C: {self.strbases.count('C')}, T: {self.strbases.count('T')}, G: {self.strbases.count('G')},")
+            a = self.strbases.count('A') / (self.strbases.count('A') + self.strbases.count('C') + self.strbases.count('T') + self.strbases.count('G'))*100
+            c = self.strbases.count('C') / (self.strbases.count('A') + self.strbases.count('C') + self.strbases.count('T') + self.strbases.count('G'))*100
+            t = self.strbases.count('T') / (self.strbases.count('A') + self.strbases.count('C') + self.strbases.count('T') + self.strbases.count('G'))*100
+            g = self.strbases.count('G') / (self.strbases.count('A') + self.strbases.count('C') + self.strbases.count('T') + self.strbases.count('G'))*100
+
+
+            return f" A: {self.strbases.count('A')} ({round(a, 2)}%), C: {self.strbases.count('C')} ({round(c,2)}%), T: {self.strbases.count('T')} ({round(t,2)}%), G: {self.strbases.count('G')} ({round(g,2)}%)"
         else:
             print(f" A: 0, C: 0, T: 0, G: O,")
     def create_dict(self):

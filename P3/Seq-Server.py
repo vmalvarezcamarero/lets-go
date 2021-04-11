@@ -1,6 +1,6 @@
 import socket
 import server_utiles
-
+from Seq1 import Seq
 list_sequences = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG", "ATGC"]
 PORT = 8081
 IP = "172.17.0.1"
@@ -60,6 +60,32 @@ while True:
         elif command == "GET":
             response = list_sequences[int(argument)] + "\n"
             cs.send(response.encode())
+
+        elif command == "INFO":
+            s = Seq(argument)
+            response = str(s.count_bases()) + "\n"
+            cs.send(response.encode())
+
+        elif command == "COMP":
+            s = Seq(argument)
+            response = str(s.seq_complement()) + "\n"
+            cs.send(response.encode())
+
+        elif command == "REV":
+            s = Seq(argument)
+            response = str(s.seq_reverse()) + "\n"
+            cs.send(response.encode())
+
+        elif command == "GENE":
+            s = Seq(argument)
+            response = str(s.read_fasta("P3/" + argument + ".txt"))
+            cs.send(response.encode())
+
+
+
+
+
+
 
         else:
 
