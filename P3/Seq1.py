@@ -68,7 +68,7 @@ class Seq:
             g = self.strbases.count('G') / (self.strbases.count('A') + self.strbases.count('C') + self.strbases.count('T') + self.strbases.count('G'))*100
 
 
-            return f" A: {self.strbases.count('A')} ({round(a, 2)}%), C: {self.strbases.count('C')} ({round(c,2)}%), T: {self.strbases.count('T')} ({round(t,2)}%), G: {self.strbases.count('G')} ({round(g,2)}%)"
+            return f"A: {self.strbases.count('A')} ({round(a, 2)}%) \nC: {self.strbases.count('C')} ({round(c,2)}%) \nT: {self.strbases.count('T')} ({round(t,2)}%) \nG: {self.strbases.count('G')} ({round(g,2)}%)"
         else:
             print(f" A: 0, C: 0, T: 0, G: O,")
     def create_dict(self):
