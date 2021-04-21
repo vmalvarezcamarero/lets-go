@@ -33,15 +33,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
         print("The path we have followed --> " + self.path)
-        if self.path == "/":
+        a = self.path.split(".")
+        if a[0] == "/":
             contents = read_html_file("index.html")
-        elif self.path == "/info/A.html":
+        elif a[0] == "/info/A":
             contents = read_html_file("info/A.html")
-        elif self.path == "/info/C.html":
+        elif a[0] == "/info/C":
             contents = read_html_file("info/C.html")
-        elif self.path == "/info/G.html":
+        elif a[0] == "/info/G":
             contents = read_html_file("info/G.html")
-        elif self.path == "/info/T.html":
+        elif a[0] == "/info/T":
             contents = read_html_file("info/T.html")
 
         else:
