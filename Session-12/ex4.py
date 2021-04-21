@@ -34,8 +34,8 @@ def process_client(s):
 
     # This new contents are written in HTML language
     body = """
-    <!DOCTYPE html>
-    <html lang="en" dir="ltr">
+    <!DOCTYPE info>
+    <info lang="en" dir="ltr">
       <head>
         <meta charset="utf-8">
         <title>Green server</title>
@@ -44,13 +44,13 @@ def process_client(s):
         <h1>GREEN SERVER</h1>
         <p>I am the Green Server! :-)</p>
       </body>
-    </html>
+    </info>
     """
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 
     # -- Add the Content-Type header
-    header = "Content-Type: text/html\n"
+    header = "Content-Type: text/info\n"
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"
