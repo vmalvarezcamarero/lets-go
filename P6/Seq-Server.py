@@ -1,7 +1,7 @@
 import socket
 import server_utiles
 from Seq1 import Seq
-list_sequences = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG"]
+list_sequences = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG", "ATGC"]
 PORT = 8081
 IP = "172.17.0.1"
 
@@ -58,17 +58,17 @@ while True:
             server_utiles.ping(cs)
 
         elif command == "GET":
-            response = "* Testing INFO... \nGET 0 = " + list_sequences[0] + "\n" + "GET 1 = " + list_sequences[1] + "\n" + "GET 2 = " + list_sequences[2] + "\n" + "GET 3 = " + list_sequences[3] + "\n"
+            response = list_sequences[int(argument)] + "\n"
             cs.send(response.encode())
 
         elif command == "INFO":
-            s = Seq(list_sequences[0])
-            response = "* Testing INFO... \nSEQ 0 len = "+str(s.len())+"\n"+str(s.count_bases())+"\n"
+            s = Seq(argument)
+            response = str(s.len()) + "\n" + str(s.count_bases()) + "\n"
             cs.send(response.encode())
 
         elif command == "COMP":
-            s = Seq(list_sequences[0])
-            response = "Testing COMP... \nCOMP --> " + str(list_sequences[0]) + "\n" + str(s.seq_complement()) + "\n"
+            s = Seq(argument)
+            response = str(s.seq_complement()) + "\n"
             cs.send(response.encode())
 
         elif command == "REV":

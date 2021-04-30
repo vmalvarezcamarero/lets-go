@@ -32,7 +32,7 @@ def process_client(s):
     # blank line
     # Body (content to send)
 
-    # This new contents are written in HTML language
+    # This new contents are written in html language
     body = """
     <!DOCTYPE info>
     <info lang="en" dir="ltr">
