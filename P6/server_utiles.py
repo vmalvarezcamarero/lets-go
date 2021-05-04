@@ -36,31 +36,45 @@ def read_template_html_file(filename):
     return content
 
 
-def info(cs, arg):
+def info(arg):
     list_bases = ["A", "C", "G", "T"]
-    print_colored("INFO", "yellow")
     sequence = Seq(arg)
-    print("Sequence:", sequence)
-    print("Total length:", sequence.len())
-    cs.send(("Sequence: " + str(sequence) + "\n" + "Total length: " + str(sequence.len()) + "\n").encode())
-    for i in range (0, len(list_bases)):
-        print(f'{list_bases[i]}: {sequence.count_base_2()[i]} ({sequence.base_percentage()[i]})')
-        cs.send((list_bases[i] + ": " + str(sequence.count_base_2()[i]) + " (" + sequence.base_percentage()[i] + ")").encode())
-    print()
+    a = sequence.count_bases_6()[0]
+    b = sequence.count_bases_6()[1]
+    context = {
+        "sequence": arg,
+        "length": sequence.len(),
+        "operation": "Info",
+        "bases": a,
+        "percentage": b,
+        "list": list_bases
+    }
+    contents = read_template_html_file("./html/INFO.html").render(context=context)
+    return contents
 
-def comp(cs, arg):
-    print_colored("COMP", "yellow")
+
+def comp(arg):
     sequence = Seq(arg)
     response = sequence.seq_complement()
-    print(response + "\n")
-    cs.send(response.encode())
+    context = {
+        "sequence": arg,
+        "composition": response,
+        "operation": "comp"
+    }
+    contents = read_template_html_file("./html/COMP.html").render(context=context)
+    return contents
 
-def rev(cs, arg):
-    print_colored("REV", "yellow")
+def rev(arg):
     sequence = Seq(arg)
     response = sequence.seq_reverse()
-    print(response + "\n")
-    cs.send(response.encode())
+    context = {
+        "sequence": arg,
+        "reverse": response,
+        "operation": "rev"
+    }
+    contents = read_template_html_file("./html/REV.html").render(context=context)
+    return contents
+
 
 def gene(arg):
     PATH = "Sequences/" + arg + ".txt"

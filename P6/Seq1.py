@@ -97,8 +97,20 @@ class Seq:
             return new_seq
         else:
             return self.strbases
-
-
+    def count_bases_6(self):
+        a, c, g, t= 0, 0, 0, 0
+        for e in self.strbases:
+            if e == "A":
+                a += 1
+            elif e == "C":
+                c += 1
+            elif e == "G":
+                g += 1
+            elif e == "T":
+                t += 1
+        new_dict = {"A": a,"C": c,"G": g,"T": t}
+        percentage = {"A": round((a / (a+c+g+t))*100, 2), "C": round((c / (a+c+g+t))*100,2), "G": round((g / (a+c+g+t))*100,2), "T": round((t / (a+c+g+t))*100,2)}
+        return new_dict, percentage
 
 def generate_series(sequ, number):
     li = []

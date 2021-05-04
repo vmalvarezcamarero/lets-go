@@ -31,5 +31,14 @@
         </select>
       <input type="submit" value="GENE">
     </form>
-  </body>
+    <hr>
+        <form action="operation" method="get">
+            Write a sequence:   <input type="text" name="sequence"> <br>
+            Select operation:
+            {% for n in context.option_name %}
+                <input type="radio" name=operation value="{{n}}"> {{n}}
+            {% endfor %}
+          <input type="submit" value="OPERATE">
+        </form>
+    </body>
 </html>
