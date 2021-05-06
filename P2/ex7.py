@@ -1,4 +1,4 @@
-from Client0 import Client
+from ex7.Client0 import Client
 from Client import Client1
 from Seq1 import Seq
 
@@ -8,6 +8,10 @@ print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 IP = "127.0.0.1"
 PORT = 8080
 c = Client(IP, PORT)
+PRACTICE = 2
+EXERCISE = 6
+print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
+
 c1 = Client1(IP, 8081)
 s = Seq()
 s.read_fasta("P2/Sequences/PRAT1.txt")

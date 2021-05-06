@@ -1,4 +1,4 @@
-from Client0 import Client
+from ex7.Client0 import Client
 from termcolor import colored
 PRACTICE = 2
 EXERCISE = 3

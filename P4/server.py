@@ -5,7 +5,7 @@ import pathlib
 # -- Server network parameters
 IP = "127.0.0.1"
 PORT = 8080
-HTML = "P4/html/"
+HTML = "P4/info/"
 def read_html_file(filename):
     content = pathlib.Path(filename).read_text()
     return content
@@ -34,7 +34,7 @@ def process_client(s):
     # blank line
     # Body (content to send)
 
-    # This new contents are written in HTML language
+    # This new contents are written in html language
     body = """
    
     """
@@ -42,25 +42,25 @@ def process_client(s):
     status_line = "HTTP/1.1 200 OK\n"
 
     # -- Add the Content-Type header
-    header = "Content-Type: text/html\n"
+    header = "Content-Type: text/info\n"
 
     if path_name == "/info/A":
-        body = read_html_file(HTML + "A.html")
+        body = read_html_file(HTML + "A.info")
 
     elif path_name == "/info/C":
-        body = read_html_file(HTML + "C.html")
+        body = read_html_file(HTML + "C.info")
 
     elif path_name == "/info/G":
-        body = read_html_file(HTML + "G.html")
+        body = read_html_file(HTML + "G.info")
 
     elif path_name == "/info/T":
-        body = read_html_file(HTML + "T.html")
+        body = read_html_file(HTML + "T.info")
 
     elif path_name == "/":
-        body = read_html_file(HTML + "menu.html")
+        body = read_html_file(HTML + "menu.info")
 
     else:
-        body = read_html_file(HTML + "error.html")
+        body = read_html_file(HTML + "error.info")
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"

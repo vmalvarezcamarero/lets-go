@@ -1,7 +1,7 @@
-from Client0 import Client
+from ex7.Client0 import Client
 from pathlib import Path
 PRACTICE = 2
-EXERCISE = 1
+EXERCISE = 5
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 IP = "127.0.0.1"
 PORT = 8080

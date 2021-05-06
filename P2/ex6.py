@@ -1,9 +1,8 @@
-from Client0 import Client
-from Client import Client1
+from ex7.Client0 import Client
 
 from Seq1 import Seq
 PRACTICE = 2
-EXERCISE = 7
+EXERCISE = 6
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 IP = "127.0.0.1"
 PORT = 8080

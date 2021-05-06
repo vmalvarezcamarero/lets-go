@@ -1,5 +1,4 @@
 import socket
-import termcolor
 from termcolor import colored
 class Client1:
     def __init__(self, ip, port):
