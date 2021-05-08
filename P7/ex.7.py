@@ -13,8 +13,9 @@ GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ANK2":"ENSG00000145362"
 }
 SERVER = "rest.ensembl.org"
-ENDPOINT = "/sequence/id/"
 PARAMETERS = "?content-type=application/json"
+ENDPOINT = "/sequence/id/"
+
 connection = http.client.HTTPConnection(SERVER)
 try:
     for n in GENE_DICT:
