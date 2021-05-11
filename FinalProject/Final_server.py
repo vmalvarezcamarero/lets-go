@@ -64,26 +64,49 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = read_template_html_file("./html/index.html").render()
         elif path_name.split("?")[0] == "/ListSpecies":
             try:
-                ENDPOINT = "/info/species"
-                connection.request("GET", ENDPOINT + PARAMETERS)
-                response = connection.getresponse()
-                response_dict = json.loads(response.read().decode())
-                count = len(response_dict["species"])
-                empty_list = []
-                for n in range(0, int(arguments["limit"][0])):
-                    empty_list.append(response_dict["species"][n]["common_name"])
+                if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
+                    ENDPOINT = "/info/species"
+                    connection.request("GET", ENDPOINT + PARAMETERS)
+                    response = connection.getresponse()
+                    response_dict = json.loads(response.read().decode())
+                    count = len(response_dict["species"])
+                    empty_list = []
+                    for n in range(0, int(arguments["limit"][0])):
+                        empty_list.append(response_dict["species"][n]["common_name"])
 
 
-                context = {"number_seq": count,
-                           "limit": arguments["limit"][0],
-                           "names": empty_list}
+                    context = {"number_seq": count,
+                               "limit": arguments["limit"][0],
+                               "names": empty_list}
 
-                contents = read_template_html_file("./html/ListSequence.html").render(context=context)
+                    contents = read_template_html_file("./html/ListSequence.html").render(context=context)
+
+                elif int(arguments["limit"][0]) >= 310:
+                    ENDPOINT = "/info/species"
+                    connection.request("GET", ENDPOINT + PARAMETERS)
+                    response = connection.getresponse()
+                    response_dict = json.loads(response.read().decode())
+                    count = len(response_dict["species"])
+                    empty_list = []
+                    for n in range(0, 310):
+                        empty_list.append(response_dict["species"][n]["common_name"])
+
+
+                    context = {"number_seq": count,
+                               "limit": arguments["limit"][0],
+                               "names": empty_list}
+
+                    contents = read_template_html_file("./html/ListSequence.html").render(context=context)
+
+                else:
+                    contents = read_template_html_file("./html/DataError.html").render()
+
 
             except ValueError:
                 contents = read_template_html_file("./html/DataError.html").render()
         elif path_name.split("?")[0] == "/karyotype":
             try:
+
                 ENDPOINT = "/info/assembly/"
                 specie = arguments["specie"][0]
                 connection.request("GET", ENDPOINT + specie + PARAMETERS)
