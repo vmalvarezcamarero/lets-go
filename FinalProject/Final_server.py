@@ -72,15 +72,56 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 empty_list = []
                 for n in range(0, int(arguments["limit"][0])):
                     empty_list.append(response_dict["species"][n]["common_name"])
-                    #empty_list = empty_list + str(response_dict["species"][n]["common_name"])
+
 
                 context = {"number_seq": count,
                            "limit": arguments["limit"][0],
                            "names": empty_list}
 
                 contents = read_template_html_file("./html/ListSequence.html").render(context=context)
+
             except ValueError:
-                contents = read_template_html_file("./html/Error.html").render()
+                contents = read_template_html_file("./html/DataError.html").render()
+        elif path_name.split("?")[0] == "/karyotype":
+            try:
+                ENDPOINT = "/info/assembly/"
+                specie = arguments["specie"][0]
+                connection.request("GET", ENDPOINT + specie + PARAMETERS)
+                response = connection.getresponse()
+                response_dict = json.loads(response.read().decode())
+                print("The dictionary:" + str(response_dict))
+                empty_list = []
+                for n in response_dict["karyotype"]:
+                    empty_list.append(n)
+
+                context = {"kar": empty_list}
+
+                contents = read_template_html_file("./html/Karyotype.html").render(context = context)
+            except KeyError:
+                contents = read_template_html_file("./html/DataError.html").render()
+
+        elif path_name.split("?")[0] == "/chromosomeLength":
+            try:
+                ENDPOINT = "/info/assembly/"
+                specie = arguments["specie"][0]
+                connection.request("GET", ENDPOINT + specie + PARAMETERS)
+                response = connection.getresponse()
+                response_dict = json.loads(response.read().decode())
+                for n in range (0, len (response_dict['top_level_region'])):
+                    if response_dict['top_level_region'][n]["name"] == arguments["chromosome"][0]:
+                        length = response_dict['top_level_region'][n]["length"]
+                        context = {"length": length}
+                    else:
+                        pass
+                    print(response_dict)
+
+                    contents = read_template_html_file("./html/chromosomeLength.html").render(context = context)
+            except KeyError:
+                contents = read_template_html_file("./html/DataError.html").render()
+            except IndexError:
+                contents = read_template_html_file("./html/DataError.html").render()
+
+
 
         else:
             contents = read_template_html_file("./html/Error.html").render()

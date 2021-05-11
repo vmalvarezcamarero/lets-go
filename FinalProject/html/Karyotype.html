@@ -1,0 +1,17 @@
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+      </head>
+      <body style="background-color: lightgrey;">
+        <p>The number of chromosomes:</p>
+        <p></p>
+        <ul>
+        {% for n in context.kar%}
+          <li type="square">{{n}}</li>
+        {% endfor %}
+        </ul>
+
+        <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+      </body>
+    </html>
