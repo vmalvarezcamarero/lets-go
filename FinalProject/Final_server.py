@@ -75,7 +75,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         if path_name == "/":
             contents = read_template_html_file("./html/index.html").render()
+
         elif path_name.split("?")[0] == "/listSpecies":
+
             try:
                 if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
 
@@ -95,6 +97,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                     contents = read_template_html_file("./html/ListSequence.html").render(context=context)
 
+
                 elif int(arguments["limit"][0]) >= 310:
 
                     ENDPOINT = "/info/species"
@@ -112,6 +115,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                "names": empty_list}
 
                     contents = read_template_html_file("./html/ListSequence.html").render(context=context)
+
+
 
 
 
