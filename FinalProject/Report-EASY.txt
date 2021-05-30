@@ -90,14 +90,16 @@ http://127.0.0.1:8080/karyotype?specie=worm
 * output:
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body style="background-color: lightgrey;">
-<body>
-   The number of chromosomes: <br>
-   <ul><li>I</li><li>II</li><li>III</li><li>IV</li><li>V</li><li>X</li><li>MtDNA</li>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="background-color: lightgrey;">
+   <p>The number of chromosomes:</p>
+   <p></p>
+   <ul>
+   <li>I</li><li>II</li><li>III</li><li>IV</li><li>V</li><li>X</li><li>MtDNA</li>
+   </ul>
 </body>
 </html>
 
@@ -135,15 +137,14 @@ http://127.0.0.1:8080/chromosomeLength?specie=Human&chromosome=3
 * output:
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body style="background-color: lightgrey;">
-<body>
-   The length of the chromosome: 198295559<br>
-
-</body>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="background-color: lightgrey;">
+    <p>The length of the chromosome: 198295559</p>
+    <p></p>
+  </body>
 </html>
 
 * TEST 2:
