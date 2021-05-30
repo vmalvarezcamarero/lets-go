@@ -1,6 +1,7 @@
 import http.server
 import json
 import utiles as us
+
 GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ADA":"ENSG00000196839",
      "FXN":"ENSG00000165060",
@@ -125,3 +126,32 @@ def function_7(arguments):
                "percentage": inf_dict_perc,
                }
     return context
+
+
+def json_function_1():
+    ENDPOINT = "/info/species"
+    connection.request("GET", ENDPOINT + PARAMETERS)
+    response = connection.getresponse()
+    response_dict = json.loads(response.read().decode())
+    return response_dict
+
+def print_json_function_1(response_dict):
+    empty_list = []
+    for n in range(0, 4):
+        empty_list.append(response_dict["species"][n]["common_name"])
+
+    return empty_list
+
+def print_json_function_2():
+    ENDPOINT = "/info/assembly/"
+    specie = "pig"
+    connection.request("GET", ENDPOINT + specie + PARAMETERS)
+    response = connection.getresponse()
+    response_dict = json.loads(response.read().decode())
+    return response_dict
+
+def print_json_function_3(response_dict):
+    empty_list = []
+    for n in response_dict["karyotype"]:
+        empty_list.append(n)
+    return empty_list

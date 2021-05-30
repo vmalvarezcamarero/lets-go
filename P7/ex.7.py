@@ -22,6 +22,8 @@ try:
         ID = GENE_DICT[n]
         connection.request("GET", ENDPOINT + ID + PARAMETERS)
         response = connection.getresponse()
+
+
         if response.status == 200:
             response_dict = json.loads(response.read().decode())
             sequence = Seq1.Seq(response_dict["seq"])

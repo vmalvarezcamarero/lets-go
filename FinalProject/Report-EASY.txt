@@ -17,8 +17,8 @@ http://127.0.0.1:8080/listSpecies?limit=3
     <meta charset="utf-8">
   </head>
   <body style="background-color: lightgrey;">
-    <p>Number of sequences found: {{context.number_seq}}</p>
-    <p>The limit selected: {{context.limit}}</p>
+    <p>Number of sequences found: 310</p>
+    <p>The limit selected: 3</p>
     <p></p>
     <p>Name of each specie: </p>
     <ul>
@@ -44,8 +44,8 @@ http://127.0.0.1:8080/listSpecies?limit=3444
     <meta charset="utf-8">
   </head>
   <body style="background-color: lightgrey;">
-    <p>Number of sequences found: {{context.number_seq}}</p>
-    <p>The limit selected: {{context.limit}}</p>
+    <p>Number of sequences found: 310</p>
+    <p>The limit selected: 3</p>
     <p></p>
     <p>Name of each specie: </p>
     <ul>

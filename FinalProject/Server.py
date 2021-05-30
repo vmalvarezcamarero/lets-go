@@ -5,6 +5,11 @@ import pathlib
 import jinja2
 from urllib.parse import urlparse, parse_qs
 import Utiles as Us
+import json
+
+SERVER = "rest.ensembl.org"
+PARAMETERS = "?content-type=application/json"
+connection = http.client.HTTPConnection(SERVER)
 
 GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ADA":"ENSG00000196839",
@@ -50,27 +55,39 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
         if path_name == "/":
+            inf_type = 'text/html'
             contents = read_template_html_file("./html/index.html").render()
 
         elif path_name.split("?")[0] == "/listSpecies":
-            try:
-                if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
-                    contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_1(arguments)))
+            if "json" in arguments.keys():
+                inf_type = 'application/json'
+                contents = json.dumps(Us.json_function_1(), indent=4, sort_keys=True)
+            else:
+                inf_type = 'text/html'
+                try:
+                    if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
+                        contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_1(arguments)))
 
-                elif int(arguments["limit"][0]) >= 310:
-                    contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_2(arguments)))
+                    elif int(arguments["limit"][0]) >= 310:
+                        contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_2(arguments)))
 
-            except ValueError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                except ValueError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
         elif path_name.split("?")[0] == "/karyotype":
-            try:
-                contents = read_template_html_file("./html/Karyotype.html").render(context=dict(Us.function_3(arguments)))
+            if "json" in arguments.keys():
+                inf_type = 'application/json'
+                contents = json.dumps(Us.print_json_function_2(), indent=4, sort_keys=True)
+            else:
+                inf_type = 'text/html'
+                try:
+                    contents = read_template_html_file("./html/Karyotype.html").render(context=dict(Us.function_3(arguments)))
 
-            except KeyError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                except KeyError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
         elif path_name.split("?")[0] == "/chromosomeLength":
+            inf_type = 'text/html'
             try:
                 contents = read_template_html_file("./html/chromosomeLength.html").render(context=dict(Us.function_4(arguments)))
 
@@ -84,6 +101,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = read_template_html_file("./html/DataError.html").render()
 
         elif path_name.split("?")[0] == "/geneSeq":
+            inf_type = 'text/html'
             try:
                 contents = read_template_html_file("./html/Gene_Seq.html").render(context=dict(Us.function_5(arguments)))
 
@@ -91,6 +109,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = read_template_html_file("./html/DataError.html").render()
 
         elif path_name.split("?")[0] == "/geneInfo":
+            inf_type = 'text/html'
             try:
                 contents = read_template_html_file("./html/Gene_Info.html").render(context=dict(Us.function_6(arguments)))
 
@@ -99,6 +118,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
 
         elif path_name.split("?")[0] == "/geneCalc":
+            inf_type = 'text/html'
             try:
                 contents = read_template_html_file("./html/Gene_basis.html").render(context=dict(Us.function_7(arguments)))
 
@@ -106,11 +126,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 contents = read_template_html_file("./html/DataError.html").render()
 
         else:
+            inf_type = 'text/html'
             contents = read_template_html_file("./html/Error.html").render()
 
 
+        self.send_response(200)
+
         # Define the content-type header:
-        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Type', inf_type)
         self.send_header('Content-Length', len(contents.encode()))
 
         # The header is finished
