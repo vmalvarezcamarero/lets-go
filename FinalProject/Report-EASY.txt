@@ -1,5 +1,5 @@
-Test report example
-====================
+EASY REPORT
+-------------
 
 ---> listSpecies endpoint
 
@@ -12,18 +12,23 @@ http://127.0.0.1:8080/listSpecies?limit=3
 * output:
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LIST OF SPECIES IN THE BROWSER</title>
-</head>
-<body style="background-color: lightgrey;">
-<body>
-   The total number of species in the ensembl is : 310 <br>
-   The limit you have selected is : 3 <br>
-   The names of the species are : <ul><li>little spotted kiwi</li><li>Indian glassy fish</li><li>blue tit</li>
-</body>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="background-color: lightgrey;">
+    <p>Number of sequences found: {{context.number_seq}}</p>
+    <p>The limit selected: {{context.limit}}</p>
+    <p></p>
+    <p>Name of each specie: </p>
+    <ul>
+     <li type="square">little spotted kiwi</li><li type="square">Indian glassy fish</li><li type="square">blue tit</li>
+    </ul>
+
+    <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+  </body>
 </html>
+
 
 * TEST 2:
 
@@ -34,18 +39,22 @@ http://127.0.0.1:8080/listSpecies?limit=3444
 * output:
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LIST OF SPECIES IN THE BROWSER</title>
-</head>
-<body style="background-color: lightgrey;">
-<body>
-    <p>Number of sequences found: 310</p>
-    <p>The limit selected: 3444</p>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="background-color: lightgrey;">
+    <p>Number of sequences found: {{context.number_seq}}</p>
+    <p>The limit selected: {{context.limit}}</p>
     <p></p>
-        <p>Name of each specie: </p>
-        <ul><li>little spotted kiwi</li><li>Indian glassy fish</li><li>blue tit</li>... ("It would end with the specie number 310")
+    <p>Name of each specie: </p>
+    <ul>
+     <li type="square">little spotted kiwi</li><li type="square">Indian glassy fish</li><li type="square">blue tit</li>... ("It would end with the specie number 310")
+    </ul>
+
+    <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+  </body>
+</html>
 
 * TEST 3:
 
@@ -158,7 +167,9 @@ http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444
       </body>
     </html>
 
-
+-IMPORTANT INFORMATION-
+I have set a link in each html file to return to the main page
+<a href = "http://127.0.0.1:8080/">-Main Page-</a>
 
 
 

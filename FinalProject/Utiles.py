@@ -97,7 +97,7 @@ def function_6(arguments):
     connection.request("GET", ENDPOINT + ID + PARAMETERS)
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())
-    l = str(int(response_dict["desc"].split(":")[4]) - int(response_dict["desc"].split(":")[3]))
+    l = str(int(response_dict["desc"].split(":")[4]) - int(response_dict["desc"].split(":")[3]) + 1)
 
     context = {"seq_name": user_gene,
                "id": ID,

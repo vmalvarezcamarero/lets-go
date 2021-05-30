@@ -1,0 +1,149 @@
+MEDIUM REPORT
+-------------
+
+---> geneSeq endpoint
+
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/geneSeq?gene=ADA
+
+* output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="background-color: lightgrey;">
+    <p>Your sequence: ADA</p>
+    <p></p>
+    <p>Your sequence: </p>
+    <textarea id="gene_content" name="gene_bases" rows="5" cols="50"> ("It would return a text box with all the sequence")
+    {{context.seq}}
+</textarea></p>
+  </body>
+</html>
+
+* TEST 2:
+
+* Input:
+
+http://127.0.0.1:8080/geneSeq?gene=ewdw
+
+* output:
+
+ <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>ERROR</title>
+      </head>
+      <body style="background-color: red;">
+        <h1>ERROR</h1>
+        <p>The data you have introduced is not available :'(</p>
+      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+      </body>
+    </html>
+
+------------------------------------------------------------------------------------------------------------------------
+
+---> /geneInfo endpoint
+
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/geneInfo?gene=ADA
+
+ <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+      </head>
+      <body style="background-color: lightgrey;">
+        <p>Your sequence: ADA</p>
+        <p></p>
+        <p>length of the sequence: 32712</p>
+        <p></p>
+        <p>Start of the sequence: 44619522</p>
+        <p></p>
+        <p>End of the sequence: 44652233</p>
+        <p></p>
+        <p>Chromosome name: GRCh38</p>
+      </body>
+    </html>
+
+* TEST 2:
+
+* Input:
+
+http://127.0.0.1:8080/geneInfo?gene=wdqsd
+
+* output:
+
+ <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>ERROR</title>
+      </head>
+      <body style="background-color: red;">
+        <h1>ERROR</h1>
+        <p>The data you have introduced is not available :'(</p>
+      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+      </body>
+    </html>
+
+------------------------------------------------------------------------------------------------------------------------
+
+---> geneCalc endpoint
+
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8080/geneCalc?gene=FRAT1
+
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+      </head>
+      <body style="background-color: lightgrey;">
+        <p>Your sequence: FRAT1</p>
+        <p></p>
+        <p>Information of the basis:</p>
+         <li type="square">A = 477 (18.03%)</li><li type="square">C = 799 (30.21%)</li><li type="square">G = 849 (32.1%)</li><li type="square">T = 520 (19.66%)</li>
+        </p></p>
+        <p></p>
+
+      </body>
+    </html>
+
+* TEST 2:
+
+* Input:
+
+http://127.0.0.1:8080/geneCalc?gene=efwf
+
+* output:
+
+ <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>ERROR</title>
+      </head>
+      <body style="background-color: red;">
+        <h1>ERROR</h1>
+        <p>The data you have introduced is not available :'(</p>
+      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
+      </body>
+    </html>
+
+
+-IMPORTANT INFORMATION-
+I have set a link in each html file to return to the main page
+<a href = "http://127.0.0.1:8080/">-Main Page-</a>
