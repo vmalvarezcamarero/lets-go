@@ -43,7 +43,6 @@ http://127.0.0.1:8080/geneSeq?gene=ewdw
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 
@@ -92,7 +91,6 @@ http://127.0.0.1:8080/geneInfo?gene=wdqsd
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 
@@ -139,7 +137,6 @@ http://127.0.0.1:8080/geneCalc?gene=efwf
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 

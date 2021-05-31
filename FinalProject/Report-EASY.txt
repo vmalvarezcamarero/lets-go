@@ -24,8 +24,6 @@ http://127.0.0.1:8080/listSpecies?limit=3
     <ul>
      <li type="square">little spotted kiwi</li><li type="square">Indian glassy fish</li><li type="square">blue tit</li>
     </ul>
-
-    <a href = "http://127.0.0.1:8080/">-Main Page-</a>
   </body>
 </html>
 
@@ -73,7 +71,6 @@ http://127.0.0.1:8080/listSpecies?limit=a
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 
@@ -120,7 +117,6 @@ http://127.0.0.1:8080/karyotype?specie=123
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 
@@ -151,7 +147,8 @@ http://127.0.0.1:8080/chromosomeLength?specie=Human&chromosome=3
 
 * Input:
 
-http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444
+http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444 (It doesnt matter which parameter we change, the error
+would be exactly the same)
 
 * output:
 
@@ -164,7 +161,6 @@ http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444
       <body style="background-color: red;">
         <h1>ERROR</h1>
         <p>The data you have introduced is not available :'(</p>
-      <a href = "http://127.0.0.1:8080/">-Main Page-</a>
       </body>
     </html>
 

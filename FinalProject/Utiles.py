@@ -14,11 +14,9 @@ GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ANK2":"ENSG00000145362"
 }
 
-
 SERVER = "rest.ensembl.org"
-PARAMETERS = "?content-type=application/json"
 connection = http.client.HTTPConnection(SERVER)
-
+PARAMETERS = "?content-type=application/json"
 
 def function_1(arguments):
     ENDPOINT = "/info/species"
@@ -67,16 +65,19 @@ def function_4(arguments):
     ENDPOINT = "/info/assembly/"
     specie = arguments["specie"][0].replace("+", "_")
     connection.request("GET", ENDPOINT + specie + PARAMETERS)
+    chromosome = arguments["chromosome"][0]
+    context = {}
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())
     for n in range(0, len(response_dict['top_level_region'])):
-        if response_dict['top_level_region'][n]["name"] == arguments["chromosome"][0]:
+        if chromosome in response_dict["top_level_region"][n]["name"]:
             length = response_dict['top_level_region'][n]["length"]
             context = {"length": length}
-            return context
+
         else:
             pass
 
+    return context
 
 def function_5(arguments):
     ENDPOINT = "/sequence/id/"
@@ -127,31 +128,96 @@ def function_7(arguments):
                }
     return context
 
+def error():
+    context = {}
+    return context
 
-def json_function_1():
-    ENDPOINT = "/info/species"
-    connection.request("GET", ENDPOINT + PARAMETERS)
-    response = connection.getresponse()
-    response_dict = json.loads(response.read().decode())
-    return response_dict
 
 def print_json_function_1(response_dict):
-    empty_list = []
-    for n in range(0, 4):
-        empty_list.append(response_dict["species"][n]["common_name"])
+    print("\n__________________________________")
+    print("Testing EASY LEVEL-List/species")
+    print("__________________________________")
+    print(response_dict)
+    try:
+        print("The limit chosen --> "+ response_dict["limit"] + "\nThe name of the species:")
+        for n in range(0, len(response_dict["names"])):
+            print("* " + response_dict["names"][n])
 
-    return empty_list
+    except KeyError:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
 
-def print_json_function_2():
-    ENDPOINT = "/info/assembly/"
-    specie = "pig"
-    connection.request("GET", ENDPOINT + specie + PARAMETERS)
-    response = connection.getresponse()
-    response_dict = json.loads(response.read().decode())
-    return response_dict
+
+
+def print_json_function_2(response_dict):
+    print("\n__________________________________")
+    print("Testing EASY LEVEL-Karyotype")
+    print("__________________________________")
+    print(response_dict)
+
+    try:
+        a = response_dict["kar"]
+        print("The specie selected --> Pig")
+        print("The karyotype is: ")
+        for n in range(0, len(response_dict["kar"])):
+            print(" - " + response_dict["kar"][n])
+
+    except KeyError:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
+
 
 def print_json_function_3(response_dict):
-    empty_list = []
-    for n in response_dict["karyotype"]:
-        empty_list.append(n)
-    return empty_list
+    print("\n__________________________________")
+    print("Testing EASY LEVEL-ChromosomeLength")
+    print("__________________________________")
+    print(response_dict)
+
+    try:
+        a = response_dict["length"]
+        print("The specie selected --> Pig")
+        print("The chromosome selected --> 4")
+        print("The length is: " + str(response_dict["length"]))
+        print("\n\n")
+    except KeyError:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
+
+def print_json_function_4(response_dict):
+    print("\n++++++++++++++++++++++++++++++++++")
+    print("Testing MEDIUM LEVEL-GeneSequence")
+    print("++++++++++++++++++++++++++++++++++")
+    print(response_dict)
+    try:
+        a = response_dict["seq"]
+        print("The GENE selected --> " + response_dict["seq_name"])
+        print("The complete sequence: " + response_dict["seq"])
+    except KeyError:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
+
+def print_json_function_5(response_dict):
+    print("\n++++++++++++++++++++++++++++++++++")
+    print("Testing MEDIUM LEVEL-InfoSequence")
+    print("++++++++++++++++++++++++++++++++++")
+    print(response_dict)
+    try:
+        print("The GENE selected --> " + response_dict["seq_name"])
+        print("The length of the sequence -->" + response_dict["length"])
+        print("START --> " + response_dict["start"])
+        print("END --> " + response_dict["end"])
+        print("Chromosome name --> " + response_dict["name"])
+    except KeyError:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
+
+def print_json_function_6(response_dict):
+    print("\n++++++++++++++++++++++++++++++++++")
+    print("Testing MEDIUM LEVEL-CalcSequence")
+    print("++++++++++++++++++++++++++++++++++")
+    print(response_dict)
+    try:
+        print("The GENE selected --> " + response_dict["seq_name"])
+        for n in response_dict["count"].keys():
+            print(n + " = " + str(response_dict["count"][n]) + "(" + str(response_dict["percentage"][n])+ "%)")
+    except:
+        print("THE DATA INTRODUCED IS WRONG!!\n")
+
+
+
+

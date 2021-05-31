@@ -7,9 +7,6 @@ from urllib.parse import urlparse, parse_qs
 import Utiles as Us
 import json
 
-SERVER = "rest.ensembl.org"
-PARAMETERS = "?content-type=application/json"
-connection = http.client.HTTPConnection(SERVER)
 
 GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ADA":"ENSG00000196839",
@@ -33,7 +30,8 @@ LIST_GENES =["ADA", "FXN", "PRAT1", "RNU6_269P", "U5"]
 PORT = 8080
 LIST_OPTIONS = ["Info", "Comp", "Rev"]
 
-context = {}
+
+
 socketserver.TCPServer.allow_reuse_address = True
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -41,93 +39,106 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         """This method is called whenever the client invokes the GET method
         in the HTTP protocol request"""
 
-        termcolor.cprint(self.requestline, 'green')
+        termcolor.cprint("  " + self.requestline, 'green')
 
+        # Print the command received (should be GET)
+        print("  Command: " + self.command)
 
+        # Print the resource requested (the path)
+        termcolor.cprint("  The path we have used: " + self.path, "blue")
+
+        # we are creating a parse object (easier way to work with the elements of the path
         o = urlparse(self.path)
         path_name = o.path
         arguments = parse_qs(o.query)
+
         print("Resource requested: ", path_name)
-        print("Parameters:", arguments)
+        print("Parameters: ", arguments)
 
-        self.send_response(200)  # -- Status line: OK!
-        print("The path we have followed --> " + self.path)
+        if 'json' in arguments.keys():
+            print("Llega hasta aqui")
+            inf_type = "application/json"
+            try:
+                if path_name == "/listSpecies":
+                    contents = json.dumps(Us.function_1(arguments), indent=4, sort_keys=True)
+
+                elif path_name == "/karyotype":
+                    contents = json.dumps(Us.function_3(arguments), indent=4, sort_keys=True)
+
+                elif path_name == "/chromosomeLength":
+                    contents = json.dumps(Us.function_4(arguments), indent=4, sort_keys=True)
+
+                elif path_name == "/geneSeq":
+                    contents = json.dumps(Us.function_5(arguments), indent=4, sort_keys=True)
+
+                elif path_name == "/geneInfo":
+                    contents = json.dumps(Us.function_6(arguments), indent=4, sort_keys=True)
+
+                elif path_name == "/geneCalc":
+                    contents = json.dumps(Us.function_7(arguments), indent=4, sort_keys=True)
+
+            except KeyError:
+                contents = json.dumps(Us.error(), indent=4, sort_keys=True)
+
+            except ValueError:
+                contents = json.dumps(Us.error(), indent=4, sort_keys=True)
 
 
-        if path_name == "/":
-            inf_type = 'text/html'
-            contents = read_template_html_file("./html/index.html").render()
+        else:
+            inf_type = "text/html"
+            if path_name == "/":
+                contents = read_template_html_file("./html/index.html").render()
 
-        elif path_name.split("?")[0] == "/listSpecies":
-            if "json" in arguments.keys():
-                inf_type = 'application/json'
-                contents = json.dumps(Us.json_function_1(), indent=4, sort_keys=True)
-            else:
-                inf_type = 'text/html'
+            elif path_name == "/listSpecies":
                 try:
                     if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
-                        contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_1(arguments)))
+                        contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_1(arguments))
 
                     elif int(arguments["limit"][0]) >= 310:
-                        contents = read_template_html_file("./html/ListSequence.html").render(context=dict(Us.function_2(arguments)))
+                        contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_2(arguments))
 
                 except ValueError:
                     contents = read_template_html_file("./html/DataError.html").render()
 
-        elif path_name.split("?")[0] == "/karyotype":
-            if "json" in arguments.keys():
-                inf_type = 'application/json'
-                contents = json.dumps(Us.print_json_function_2(), indent=4, sort_keys=True)
-            else:
-                inf_type = 'text/html'
+            elif path_name == "/karyotype":
                 try:
-                    contents = read_template_html_file("./html/Karyotype.html").render(context=dict(Us.function_3(arguments)))
+                    contents = read_template_html_file("./html/Karyotype.html").render(context=Us.function_3(arguments))
 
                 except KeyError:
                     contents = read_template_html_file("./html/DataError.html").render()
 
-        elif path_name.split("?")[0] == "/chromosomeLength":
-            inf_type = 'text/html'
-            try:
-                contents = read_template_html_file("./html/chromosomeLength.html").render(context=dict(Us.function_4(arguments)))
+            elif path_name == "/chromosomeLength":
+                try:
+                    contents = read_template_html_file("./html/chromosomeLength.html").render(context=Us.function_4(arguments))
 
-            except KeyError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                except KeyError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
-            except IndexError:
-                contents = read_template_html_file("./html/DataError.html").render()
+            elif path_name == "/geneSeq":
+                try:
 
-            except TypeError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                    contents = read_template_html_file("./html/Gene_Seq.html").render(context=Us.function_5(arguments))
 
-        elif path_name.split("?")[0] == "/geneSeq":
-            inf_type = 'text/html'
-            try:
-                contents = read_template_html_file("./html/Gene_Seq.html").render(context=dict(Us.function_5(arguments)))
+                except KeyError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
-            except KeyError:
-                contents = read_template_html_file("./html/DataError.html").render()
+            elif path_name == "/geneInfo":
+                try:
+                    contents = read_template_html_file("./html/Gene_Info.html").render(context=Us.function_6(arguments))
 
-        elif path_name.split("?")[0] == "/geneInfo":
-            inf_type = 'text/html'
-            try:
-                contents = read_template_html_file("./html/Gene_Info.html").render(context=dict(Us.function_6(arguments)))
-
-            except KeyError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                except KeyError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
 
-        elif path_name.split("?")[0] == "/geneCalc":
-            inf_type = 'text/html'
-            try:
-                contents = read_template_html_file("./html/Gene_basis.html").render(context=dict(Us.function_7(arguments)))
+            elif path_name == "/geneCalc":
+                try:
+                    contents = read_template_html_file("./html/Gene_basis.html").render(context=Us.function_7(arguments))
 
-            except KeyError:
-                contents = read_template_html_file("./html/DataError.html").render()
+                except KeyError:
+                    contents = read_template_html_file("./html/DataError.html").render()
 
-        else:
-            inf_type = 'text/html'
-            contents = read_template_html_file("./html/Error.html").render()
+            else:
+                contents = read_template_html_file("./html/Error.html").render()
 
 
         self.send_response(200)
@@ -156,11 +167,11 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
 
     print("Serving at PORT", PORT)
 
-    # -- Main loop: Attend the client. Whenever there is a new
-    # -- clint, the handler is called
+
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("")
         print("Stoped by the user")
         httpd.server_close()
+
