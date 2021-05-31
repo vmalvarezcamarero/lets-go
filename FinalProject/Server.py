@@ -102,6 +102,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             elif path_name == "/karyotype":
                 try:
+                    print(Us.function_3(arguments))
                     contents = read_template_html_file("./html/Karyotype.html").render(context=Us.function_3(arguments))
 
                 except KeyError:
@@ -116,7 +117,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             elif path_name == "/geneSeq":
                 try:
-
                     contents = read_template_html_file("./html/Gene_Seq.html").render(context=Us.function_5(arguments))
 
                 except KeyError:
