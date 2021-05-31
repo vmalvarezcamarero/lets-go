@@ -51,7 +51,6 @@ def function_2(arguments):
 def function_3(arguments):
     ENDPOINT = "/info/assembly/"
     specie = arguments["specie"][0].replace(" ", "_")
-    print(specie)
     connection.request("GET", ENDPOINT + specie + PARAMETERS)
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())

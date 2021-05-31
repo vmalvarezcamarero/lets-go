@@ -102,7 +102,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             elif path_name == "/karyotype":
                 try:
-                    print(Us.function_3(arguments))
                     contents = read_template_html_file("./html/Karyotype.html").render(context=Us.function_3(arguments))
 
                 except KeyError:
