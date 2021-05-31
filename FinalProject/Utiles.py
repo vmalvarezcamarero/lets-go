@@ -18,6 +18,7 @@ SERVER = "rest.ensembl.org"
 connection = http.client.HTTPConnection(SERVER)
 PARAMETERS = "?content-type=application/json"
 
+
 def function_1(arguments):
     ENDPOINT = "/info/species"
     connection.request("GET", ENDPOINT + PARAMETERS)
@@ -54,17 +55,13 @@ def function_3(arguments):
     connection.request("GET", ENDPOINT + specie + PARAMETERS)
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())
-    empty_list = []
-    for n in response_dict["karyotype"]:
-        empty_list.append(n)
-
-    context = {"kar": empty_list}
+    context = {"kar": response_dict["karyotype"]}
     return context
 
 def function_4(arguments):
-    ENDPOINT = "/info/assembly/"
     specie = arguments["specie"][0].replace(" ", "_")
-    connection.request("GET", ENDPOINT + specie + PARAMETERS)
+    ENDPOINT = "/info/assembly/" + specie
+    connection.request("GET", ENDPOINT + PARAMETERS)
     chromosome = arguments["chromosome"][0]
     context = {}
     response = connection.getresponse()
@@ -106,7 +103,7 @@ def function_6(arguments):
                "length": l,
                "start": response_dict["desc"].split(":")[3],
                "end": response_dict["desc"].split(":")[4],
-               "name": response_dict["desc"].split(":")[1]
+               "name": response_dict["desc"].split(":")[2]
                }
     return context
 
@@ -137,7 +134,6 @@ def print_json_function_1(response_dict):
     print("\n__________________________________")
     print("Testing EASY LEVEL-List/species")
     print("__________________________________")
-    print(response_dict)
     try:
         print("The limit chosen --> "+ response_dict["limit"] + "\nThe name of the species:")
         for n in range(0, len(response_dict["names"])):
@@ -152,7 +148,6 @@ def print_json_function_2(response_dict):
     print("\n__________________________________")
     print("Testing EASY LEVEL-Karyotype")
     print("__________________________________")
-    print(response_dict)
 
     try:
         a = response_dict["kar"]
@@ -169,7 +164,6 @@ def print_json_function_3(response_dict):
     print("\n__________________________________")
     print("Testing EASY LEVEL-ChromosomeLength")
     print("__________________________________")
-    print(response_dict)
 
     try:
         a = response_dict["length"]
@@ -184,7 +178,6 @@ def print_json_function_4(response_dict):
     print("\n++++++++++++++++++++++++++++++++++")
     print("Testing MEDIUM LEVEL-GeneSequence")
     print("++++++++++++++++++++++++++++++++++")
-    print(response_dict)
     try:
         a = response_dict["seq"]
         print("The GENE selected --> " + response_dict["seq_name"])
@@ -196,7 +189,6 @@ def print_json_function_5(response_dict):
     print("\n++++++++++++++++++++++++++++++++++")
     print("Testing MEDIUM LEVEL-InfoSequence")
     print("++++++++++++++++++++++++++++++++++")
-    print(response_dict)
     try:
         print("The GENE selected --> " + response_dict["seq_name"])
         print("The length of the sequence -->" + response_dict["length"])
@@ -210,7 +202,6 @@ def print_json_function_6(response_dict):
     print("\n++++++++++++++++++++++++++++++++++")
     print("Testing MEDIUM LEVEL-CalcSequence")
     print("++++++++++++++++++++++++++++++++++")
-    print(response_dict)
     try:
         print("The GENE selected --> " + response_dict["seq_name"])
         for n in response_dict["count"].keys():

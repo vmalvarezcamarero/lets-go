@@ -250,7 +250,7 @@ http://127.0.0.1:8080/geneInfo?gene=ADA
         <p></p>
         <p>End of the sequence: 44652233</p>
         <p></p>
-        <p>Chromosome name: GRCh38</p>
+        <p>Chromosome name: 20</p>
       </body>
     </html>
 

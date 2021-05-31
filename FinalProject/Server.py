@@ -7,30 +7,12 @@ from urllib.parse import urlparse, parse_qs
 import Utiles as Us
 import json
 
-
-GENE_DICT = {"FRAT1":"ENSG00000165879",
-     "ADA":"ENSG00000196839",
-     "FXN":"ENSG00000165060",
-     "RNU6_269P":"ENSG00000212379",
-     "MIR633":"ENSG00000207552",
-     "TTTY4C":"ENSG00000226906",
-     "RBMY2YP":"ENSG00000227633",
-     "FGFR3":"ENSG00000068078",
-     "KDR":"ENSMUSG00000062960",
-     "ANK2":"ENSG00000145362"
-}
-
 def read_template_html_file(filename):
     content = jinja2.Template(pathlib.Path(filename).read_text())
     return content
 
-LIST_SEQUENCES = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG", "ATGC"]
-
 LIST_GENES =["ADA", "FXN", "PRAT1", "RNU6_269P", "U5"]
 PORT = 8080
-LIST_OPTIONS = ["Info", "Comp", "Rev"]
-
-
 
 socketserver.TCPServer.allow_reuse_address = True
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -56,7 +38,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print("Parameters: ", arguments)
 
         if 'json' in arguments.keys():
-            print("Llega hasta aqui")
             inf_type = "application/json"
             try:
                 if path_name == "/listSpecies":
@@ -93,6 +74,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 try:
                     if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_1(arguments))
+
 
                     elif int(arguments["limit"][0]) >= 310:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_2(arguments))
@@ -155,13 +137,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         return
 
 
-# ------------------------
-# - Server MAIN program
-# ------------------------
-# -- Set the new handler
+
 Handler = TestHandler
 
-# -- Open the socket server
+
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
 
     print("Serving at PORT", PORT)
