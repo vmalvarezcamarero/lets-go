@@ -84,6 +84,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 except KeyError:
                     contents = read_template_html_file("./html/DataError.html").render()
 
+                except ValueError:
+                    contents = read_template_html_file("./html/DataError.html").render()
+
+
             elif path_name == "/karyotype":
                 try:
                     contents = read_template_html_file("./html/Karyotype.html").render(context=Us.function_3(arguments))
@@ -135,6 +139,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         # Send the response message
         self.wfile.write(str.encode(contents))
+
 
         return
 

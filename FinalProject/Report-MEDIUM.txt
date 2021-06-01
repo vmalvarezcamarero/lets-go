@@ -113,7 +113,8 @@ http://127.0.0.1:8080/geneCalc?gene=FRAT1
         <p>Your sequence: FRAT1</p>
         <p></p>
         <p>Information of the basis:</p>
-         <li type="square">A = 477 (18.03%)</li><li type="square">C = 799 (30.21%)</li><li type="square">G = 849 (32.1%)</li><li type="square">T = 520 (19.66%)</li>
+         <li type="square">A = 477 (18.03%)</li><li type="square">C = 799 (30.21%)
+         </li><li type="square">G = 849 (32.1%)</li><li type="square">T = 520 (19.66%)</li>
         </p></p>
         <p></p>
 

@@ -33,6 +33,7 @@ def function_1(arguments):
     context = {"number_seq": count,
                "limit": arguments["limit"][0],
                "names": empty_list}
+    connection.close()
     return context
 
 def function_2(arguments):
@@ -48,6 +49,7 @@ def function_2(arguments):
     context = {"number_seq": count,
                "limit": arguments["limit"][0],
                "names": empty_list}
+    connection.close()
     return context
 
 def function_3(arguments):
@@ -57,6 +59,7 @@ def function_3(arguments):
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())
     context = {"kar": response_dict["karyotype"]}
+    connection.close()
     return context
 
 def function_4(arguments):
@@ -75,6 +78,8 @@ def function_4(arguments):
         else:
             pass
 
+    connection.close()
+
     return context
 
 def function_5(arguments):
@@ -88,6 +93,7 @@ def function_5(arguments):
 
     context = {"seq_name": user_gene,
                "seq": response_dict["seq"]}
+    connection.close()
     return context
 
 def function_6(arguments):
@@ -106,6 +112,7 @@ def function_6(arguments):
                "end": response_dict["desc"].split(":")[4],
                "name": response_dict["desc"].split(":")[2]
                }
+    connection.close()
     return context
 
 def function_7(arguments):
@@ -124,6 +131,7 @@ def function_7(arguments):
                "count": inf_dict,
                "percentage": inf_dict_perc,
                }
+    connection.close()
     return context
 
 def error():

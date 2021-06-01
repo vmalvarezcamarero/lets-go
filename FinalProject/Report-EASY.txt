@@ -47,7 +47,8 @@ http://127.0.0.1:8080/listSpecies?limit=3444
     <p></p>
     <p>Name of each specie: </p>
     <ul>
-     <li type="square">little spotted kiwi</li><li type="square">Indian glassy fish</li><li type="square">blue tit</li>... ("It would end with the specie number 310")
+     <li type="square">little spotted kiwi</li><li type="square">Indian glassy fish</li><li type="square">blue tit</li>
+     ... ("It would end with the specie number 310")
     </ul>
 
     <a href = "http://127.0.0.1:8080/">-Main Page-</a>
@@ -147,8 +148,8 @@ http://127.0.0.1:8080/chromosomeLength?specie=Human&chromosome=3
 
 * Input:
 
-http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444 (It doesnt matter which parameter we change, the error
-would be exactly the same)
+http://127.0.0.1:8080/chromosomeLength?specie=aaa&chromosome=444
+(It doesnt matter which parameter we change, the error would be exactly the same)
 
 * output:
 
