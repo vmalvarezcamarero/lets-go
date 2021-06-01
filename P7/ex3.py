@@ -21,7 +21,7 @@ connection.request("GET", ENDPOINT + ID + PARAMETERS)
 response = connection.getresponse()
 print("Response received!:", response.status, response.reason)
 if response.status == 200:
-    response = json.loads(connection.getresponse().read().decode())
+    response = json.loads(response.read().decode())
     print(json.dumps(response, indent=4, sort_keys=True))
     print ("Gene:", ID)
     print("Description:", response["desc"])

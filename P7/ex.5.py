@@ -36,6 +36,8 @@ try:
             for n in bases:
                 print(n + " --> " + str(bases[n]) + "(" + str(percentage[n]) + "%)")
             print("Most frequent base: " + str(most_frequent))
+        else:
+            print("FATAL ERROR")
 
 
 
