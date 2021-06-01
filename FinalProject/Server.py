@@ -37,7 +37,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print("Resource requested: ", path_name)
         print("Parameters: ", arguments)
 
-        if 'json' in arguments.keys():
+        if 'json' in arguments.keys() and arguments["json"][0] == "1":
             inf_type = "application/json"
             try:
                 if path_name == "/listSpecies":
@@ -64,7 +64,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except ValueError:
                 contents = json.dumps(Us.error(), indent=4, sort_keys=True)
 
-
         else:
             inf_type = "text/html"
             if path_name == "/":
@@ -73,13 +72,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             elif path_name == "/listSpecies":
                 try:
                     if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
-                        contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_1(arguments))
 
+                        contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_1(arguments))
 
                     elif int(arguments["limit"][0]) >= 310:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_2(arguments))
 
-                except ValueError:
+                    else:
+                        contents = read_template_html_file("./html/DataError.html").render()
+
+                except KeyError:
                     contents = read_template_html_file("./html/DataError.html").render()
 
             elif path_name == "/karyotype":
@@ -132,7 +134,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
         # Send the response message
-        self.wfile.write(contents.encode())
+        self.wfile.write(str.encode(contents))
 
         return
 

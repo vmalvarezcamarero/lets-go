@@ -1,5 +1,4 @@
 from pathlib import Path
-from Seq1 import Seq
 import jinja2
 import pathlib
 class Seq:

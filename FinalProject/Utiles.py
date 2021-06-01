@@ -1,6 +1,7 @@
-import http.server
+
 import json
 import utiles as us
+import http.client
 
 GENE_DICT = {"FRAT1":"ENSG00000165879",
      "ADA":"ENSG00000196839",
@@ -50,9 +51,9 @@ def function_2(arguments):
     return context
 
 def function_3(arguments):
-    ENDPOINT = "/info/assembly/"
     specie = arguments["specie"][0].replace(" ", "_")
-    connection.request("GET", ENDPOINT + specie + PARAMETERS)
+    ENDPOINT = "/info/assembly/" + specie
+    connection.request("GET", ENDPOINT + PARAMETERS)
     response = connection.getresponse()
     response_dict = json.loads(response.read().decode())
     context = {"kar": response_dict["karyotype"]}
