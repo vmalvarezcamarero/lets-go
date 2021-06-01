@@ -2,7 +2,7 @@ from pathlib import Path
 class Seq:
     """A class for representing sequences"""
     NULL_SEQUENCE = "NULL"
-    INVALID_SEQUENCE = "ERROR"
+    INVALID_SEQUENCE = "ERROR, sequence is not valid"
 
     def __init__(self, strbases=NULL_SEQUENCE):
 
@@ -74,9 +74,9 @@ class Seq:
             print(f" A: 0, C: 0, T: 0, G: O,")
     def create_dict(self):
         if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:
-            return{"A": self.strbases.count('A'), "C": self.strbases.count('C'), "T": self.strbases.count('T'), "G": self.strbases.count('G'),}
+            return{"A": self.strbases.count('A'), "C": self.strbases.count('C'), "T": self.strbases.count('T'), "G": self.strbases.count('G')}
         else:
-            return{"A": 0, "C": 0, "T": 0, "G": 0,}
+            return True
 
     def seq_reverse(self):
         if self.strbases != Seq.INVALID_SEQUENCE and self.strbases != Seq.NULL_SEQUENCE:

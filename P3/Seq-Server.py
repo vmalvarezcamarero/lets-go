@@ -4,7 +4,7 @@ from Seq1 import Seq
 list_sequences = ["AAAAAAAAAATTGGCCT", "ACCACAAATGGGGGGTCA", "AAAAATGGGCCTG", "TTTTTTGGGGGTGGGG", "ATGC"]
 PORT = 8081
 IP = "172.17.0.1"
-
+sequences = "./sequences/"
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -59,28 +59,49 @@ while True:
             server_utiles.ping(cs)
 
         elif command == "GET":
-            response = list_sequences[int(argument)] + "\n"
-            cs.send(response.encode())
+            try:
+                response = list_sequences[int(argument)] + "\n"
+                cs.send(response.encode())
+            except IndexError:
+                response= "The number you have introduced is out of range\n"
+                cs.send(response.encode())
+            except ValueError:
+                response = "The sequence introduces must be a number\n"
+                cs.send(response.encode())
+
+
 
         elif command == "INFO":
             s = Seq(argument)
-            response = str(s.len()) + "\n" + str(s.count_bases()) + "\n"
-            cs.send(response.encode())
+            if s.create_dict() == True:
+                response = "THE SEQUENCE SELECTED IS WRONG\n"
+                cs.send(response.encode())
+            else:
+                response = str(s.len()) + "\n" + str(s.count_bases()) + "\n"
+                cs.send(response.encode())
 
         elif command == "COMP":
             s = Seq(argument)
-            response = str(s.seq_complement()) + "\n"
-            cs.send(response.encode())
+            try:
+                response = str(s.seq_complement()) + "\n"
+                cs.send(response.encode())
+            except ValueError:
+                pass
 
         elif command == "REV":
             s = Seq(argument)
+
             response = str(s.seq_reverse()) + "\n"
             cs.send(response.encode())
 
         elif command == "GENE":
             s = Seq(argument)
-            response = str(s.read_fasta(str(argument) + ".txt"))
-            cs.send(response.encode())
+            try:
+                response = str(s.read_fasta(sequences + str(argument) + ".txt"))
+                cs.send(response.encode())
+            except FileNotFoundError:
+                response = "The file is not found\n"
+                cs.send(response.encode())
 
         else:
 
