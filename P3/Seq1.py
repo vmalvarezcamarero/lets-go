@@ -27,8 +27,9 @@ class Seq:
 
     def sequence_is_valid(self):
         for c in self.strbases:
-            if c != "A" and c != "C" and c != "G" and c != "T":
-                return False
+            if self.strbases != "ADA" and self.strbases != "FXN" and self.strbases != "PRAT1" and self.strbases != "RNU6_269P" and self.strbases != "U5":
+                if c != "A" and c != "C" and c != "G" and c != "T" and c != "\n":
+                    return False
         return True
 
 

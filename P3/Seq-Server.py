@@ -54,6 +54,7 @@ while True:
         else:
             command = formatted_message[0]
             argument = formatted_message[1]
+            print(formatted_message)
         if command == "PING":
             server_utiles.ping(cs)
 
@@ -78,14 +79,8 @@ while True:
 
         elif command == "GENE":
             s = Seq(argument)
-            response = str(s.read_fasta("P3/" + argument + ".txt"))
+            response = str(s.read_fasta(str(argument) + ".txt"))
             cs.send(response.encode())
-
-
-
-
-
-
 
         else:
 
