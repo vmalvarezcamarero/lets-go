@@ -1,6 +1,8 @@
 import socket
-import termcolor
 from pathlib import Path
+
+import termcolor
+
 # from urllib.parse import urlparse, parse_qs --> only works with HTTP protocols
 
 HTML_ASSETS = "./html/"
