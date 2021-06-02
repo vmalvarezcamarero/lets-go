@@ -77,21 +77,21 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if "check" in arguments and arguments["check"][0] == "on":
                             print("THE CHECK BUTTON HAS BEEN CLICKED")
                         else:
-                            pass
+                            print("THE CHECK BUTTON HAS NOT BEEN CLICKED")
 
                     elif int(arguments["limit"][0]) >= 310:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_2(arguments))
                         if "check" in arguments and arguments["check"][0] == "on":
                             print("THE CHECK BUTTON HAS BEEN CLICKED")
                         else:
-                            pass
+                            print("THE CHECK BUTTON HAS NOT BEEN CLICKED")
 
                     else:
                         contents = read_template_html_file("./html/DataError.html").render()
                         if "check" in arguments and arguments["check"][0] == "on":
                             print("THE CHECK BUTTON HAS BEEN CLICKED")
                         else:
-                            pass
+                            print("THE CHECK BUTTON HAS NOT BEEN CLICKED")
 
 
                 except KeyError:

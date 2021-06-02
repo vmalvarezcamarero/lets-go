@@ -71,10 +71,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 inf_type = "text/html"
                 context = Basis_inf[base]
                 context["letter"] = base
-                contents = read_template_html_file("info/general.html").render(base_inf=context)
+                contents = read_template_html_file("./info/general.html").render(base_inf=context)
 
         else:
-            contents = read_html_file("info/error.html")
+            contents = read_html_file("./info/error.html")
 
         # Define the content-type header:
         self.send_header('Content-Type', inf_type)
