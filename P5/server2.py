@@ -3,14 +3,11 @@ import socketserver
 import termcolor
 import pathlib
 import jinja2
+import json
 # Define the Server's port
 PORT = 8080
 
 Basis_inf = {
-    "A":{"link": "https://es.wikipedia.org/wiki/Adenina",
-         "formula": "C5H5N5",
-         "name": "ADENINE",
-         "colour": "lightgreen"},
     "C":{"link": "https://es.wikipedia.org/wiki/Cytosine",
          "formula": "C5Hu5N5",
          "name": "CYTOSINE",
@@ -25,6 +22,10 @@ Basis_inf = {
          "colour": "pink"}
 
 }
+
+final_dict = {'Name': 'Adenine', 'Letter' : 'A' ,
+'Link': 'https://en.wikipedia.org/wiki/Adenine', 'Formula': 'C5H5N5'}
+
 # -- This is for preventing the error: "Port already in use"
 socketserver.TCPServer.allow_reuse_address = True
 def read_html_file(filename):
@@ -51,7 +52,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # that everything is ok
 
         # Message to send back to the clinet
-
+        inf_type = "text/html"
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
@@ -59,19 +60,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         if self.path == "/":
             contents = read_html_file("index.html")
+            inf_type = "text/html"
         elif "/info/" in self.path:
             base = self.path.split("/")[-1]
-            context = Basis_inf[base]
-            context["letter"] = base
-            contents = read_template_html_file("info/general.html").render(base_inf=context)
-
-
+            if base == "A":
+                inf_type = "application/json"
+                context = final_dict
+                contents = json.dumps(context, indent=3, sort_keys=True)
+            else:
+                inf_type = "text/html"
+                context = Basis_inf[base]
+                context["letter"] = base
+                contents = read_template_html_file("info/general.html").render(base_inf=context)
 
         else:
             contents = read_html_file("info/error.html")
 
         # Define the content-type header:
-        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Type', inf_type)
         self.send_header('Content-Length', len(contents.encode()))
 
         # The header is finished

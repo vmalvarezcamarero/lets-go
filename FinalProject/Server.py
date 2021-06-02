@@ -71,15 +71,28 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             elif path_name == "/listSpecies":
                 try:
-                    if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
 
+                    if int(arguments["limit"][0]) <= 310 and int(arguments["limit"][0]) >= 0:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_1(arguments))
+                        if "check" in arguments and arguments["check"][0] == "on":
+                            print("THE CHECK BUTTON HAS BEEN CLICKED")
+                        else:
+                            pass
 
                     elif int(arguments["limit"][0]) >= 310:
                         contents = read_template_html_file("./html/ListSequence.html").render(context=Us.function_2(arguments))
+                        if "check" in arguments and arguments["check"][0] == "on":
+                            print("THE CHECK BUTTON HAS BEEN CLICKED")
+                        else:
+                            pass
 
                     else:
                         contents = read_template_html_file("./html/DataError.html").render()
+                        if "check" in arguments and arguments["check"][0] == "on":
+                            print("THE CHECK BUTTON HAS BEEN CLICKED")
+                        else:
+                            pass
+
 
                 except KeyError:
                     contents = read_template_html_file("./html/DataError.html").render()
