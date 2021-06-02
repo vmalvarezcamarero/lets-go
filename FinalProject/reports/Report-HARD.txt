@@ -2,10 +2,7 @@
 *  FIRST WE WILL CHECK THAT EASY AND MEDIUM SERVICES WORK WITHOUT JSON=1  *
 ---------------------------------------------------------------------------
 
-
-
-EASY REPORT
--------------
+-EASY LEVEL-
 
 ---> listSpecies endpoint
 
@@ -176,8 +173,7 @@ would be exactly the same)
 ************************************************************************************************************************
 ************************************************************************************************************************
 
-MEDIUM REPORT
--------------
+-MEDIUM LEVEL-
 
 ---> geneSeq endpoint
 
@@ -328,8 +324,8 @@ I have set a link in each html file to return to the main page
 ************************************************************************************************************************
 ************************************************************************************************************************
 
-HARD REPORT
--------------
+-HARD LEVEL-
+
 In this report the client would be checked. For that, I would show the Input(carried out by the client) and the
 information given(json dictionary)
 
@@ -354,11 +350,6 @@ http://127.0.0.1:8080///listSpecies?limit=aaaa&json=1
 * json dictionary:
 
 {}  I have made that any time there is a wrong parameter an empty dictionary is sent (Can be seen in the server)
-
-__________________________________
-Testing EASY LEVEL-List/species
-__________________________________
-THE DATA INTRODUCED IS WRONG!!
 
 ------------------------------------------------------------------------------------------------------------------------
 
